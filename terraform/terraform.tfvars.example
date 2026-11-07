@@ -1,0 +1,7 @@
+aws_region            = "eu-west-1"
+bastion_instance_type = "t3.micro"
+backend_instance_type = "t3.micro"
+mongodb_instance_type = "t3.micro"
+my_ip                 = ["MY_PUBLIC_IP_1/32", "MY_PUBLIC_IP_2/32"] #my public ip
+key_name              = "my-assessment-key" # Existing EC2 key pair name
+        

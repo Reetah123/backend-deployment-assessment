@@ -1,0 +1,26 @@
+# Git files
+.git
+.gitignore
+
+# Environment files containing secrets
+.env
+.env.*
+
+# Terraform files
+terraform/
+*.tfstate
+*.tfstate.*
+
+# Documentation and evidence
+README.md
+evidence/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+
+# Local build files
+bin/
+tmp/
+*.log

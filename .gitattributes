@@ -1,0 +1,6 @@
+# Keep Linux shell scripts with LF line endings
+*.sh text eol=lf
+
+# Use LF for Terraform and Docker configuration files
+*.tf text eol=lf
+Dockerfile text eol=lf

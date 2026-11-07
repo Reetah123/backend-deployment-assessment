@@ -1,0 +1,44 @@
+services:
+ mongodb:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+ backend:
+    build: 
+     context: ../much-to-do/Server/MuchToDo
+     dockerfile: ../../../backend-deployment-assessment/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes: 
+       - ./.env:/app/.env:ro
+    environment:
+      PORT: "8080"
+      MONGO_URI: "mongodb://mongodb:27017"
+      DB_NAME: "much_todo_db"
+      JWT_SECRET_KEY: "${JWT_SECRET_KEY:?Set JWT_SECRET_KEY in .env}"
+      JWT_EXPIRATION_HOURS: "72"
+      ENABLE_CACHE: "false"
+      LOG_LEVEL: "INFO"
+      LOG_FORMAT: "json"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  app-network:
+    driver: bridge
