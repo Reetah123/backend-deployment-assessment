@@ -13,9 +13,8 @@ services:
       retries: 10
       start_period: 20s
  backend:
-    build: 
-     context: ../much-to-do/Server/MuchToDo
-     dockerfile: ../../../backend-deployment-assessment/Dockerfile
+    # Use the image already built locally and pushed to Docker Hub
+    image: reetahtee/muchtodo-api:v1
     restart: unless-stopped
     ports:
       - "8080:8080"
