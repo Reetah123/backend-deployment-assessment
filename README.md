@@ -182,6 +182,40 @@ The endpoint returned HTTP `200 OK` through the ALB. The ALB uses HTTP on port `
 
 The `evidence/` folder contains the assessment screenshots, including Terraform initialization, plan and apply, AWS resources, Docker image build, healthy local containers, local health response, Bastion SSH access, healthy containers on EC2 and the successful ALB health request.
 
+## Terraform state (assessment requirement )
+Terraform keeps its record of the provisioned AWS resources in terraform/terraform.tfstate. I kept this working state file locally because it is used for later terraform plan, apply and destroy operations. I did not edit or upload the original file.
+To prepare a state export for review, I used the following command in the terraform/ directory:
+
+```bash
+terraform state pull > terraform-state-export.json
+```
+The exported JSON is a full copy of the state, not a sanitized file. It contains resource IDs, internal network details, User Data and possibly credentials. I kept the raw export out of GitHub and checked the resource information before preparing a safer summary.
+
+For the public repository, I used PowerShell to generate a separate resource inventory from the export:
+
+```powershell
+$state = Get-Content .\terraform-state-export.json -Raw | ConvertFrom-Json
+
+$report = [ordered]@{
+    terraform_version = $state.terraform_version
+    resources = @(
+        foreach ($resource in $state.resources) {
+            [ordered]@{
+                mode = $resource.mode
+                type = $resource.type
+                name = $resource.name
+            }
+        }
+    )
+}
+
+$report | ConvertTo-Json -Depth 10 | Set-Content .\terraform-state-sanitized.json
+```
+I checked that the sanitized file lists actual resources rather than null entries and reviewed it before sharing. This summary contains resource type/name information but leaves out resource attributes and values, which could expose sensitive details. 
+```bash
+terraform-state-export.json was included in .gitignore rules.
+```
+
 ## Cleanup
 
 To stop the containers without deleting MongoDB's named volume:
@@ -199,3 +233,6 @@ terraform destroy
 ```
 
 EC2, NAT Gateway, ALB and public IPv4 resources can incur charges while running. Terraform state is kept out of the public repository because it can contain sensitive infrastructure details.
+
+
+

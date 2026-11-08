@@ -1,0 +1,150 @@
+{
+    "terraform_version":  "1.17.0",
+    "resources":  [
+                      {
+                          "mode":  "data",
+                          "type":  "aws_ami",
+                          "name":  "amazon_linux_2"
+                      },
+                      {
+                          "mode":  "data",
+                          "type":  "aws_availability_zones",
+                          "name":  "available"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_eip",
+                          "name":  "bastion"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_eip",
+                          "name":  "nat"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_instance",
+                          "name":  "backend"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_instance",
+                          "name":  "bastion"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_instance",
+                          "name":  "mongodb"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_internet_gateway",
+                          "name":  "main"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_key_pair",
+                          "name":  "assessment"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_lb",
+                          "name":  "backend"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_lb_listener",
+                          "name":  "http"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_lb_target_group",
+                          "name":  "backend"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_lb_target_group_attachment",
+                          "name":  "backend"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_nat_gateway",
+                          "name":  "main"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table",
+                          "name":  "private"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table",
+                          "name":  "public"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table_association",
+                          "name":  "private_1"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table_association",
+                          "name":  "private_2"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table_association",
+                          "name":  "public_1"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_route_table_association",
+                          "name":  "public_2"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_security_group",
+                          "name":  "alb"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_security_group",
+                          "name":  "backend"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_security_group",
+                          "name":  "bastion"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_security_group",
+                          "name":  "mongodb"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_subnet",
+                          "name":  "private_1"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_subnet",
+                          "name":  "private_2"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_subnet",
+                          "name":  "public_1"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_subnet",
+                          "name":  "public_2"
+                      },
+                      {
+                          "mode":  "managed",
+                          "type":  "aws_vpc",
+                          "name":  "startuptech"
+                      }
+                  ]
+}

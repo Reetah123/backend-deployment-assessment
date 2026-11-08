@@ -8,3 +8,4 @@ terraform/.terraform.lock.hcl
 terraform/crash.log
 .env.*
 !.env.example
+terraform-state-export.json
